@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-MONGO_URI = "mongodb+srv://vhranovskiy84_db_user:V19JdJuHo2nSCheZ@cluster0.aybhihk.mongodb.net/?appName=Cluster0"
+MONGO_URI = os.environ["MONGO_URI"]
 DB_NAME = "spotify"
 CSV_PATH = "./archive/dataset.csv"     # шлях до завантаженого файлу з Kaggle
 BATCH_SIZE = 1000
