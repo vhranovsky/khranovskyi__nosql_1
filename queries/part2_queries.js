@@ -154,3 +154,28 @@ db.tracks.aggregate([
   // Сортуємо жанри за алфавітом
   { $sort: { genre: 1 } }
 ]);
+
+
+// Завдання 4: Треки для фонової роботи
+db.tracks.find(
+    {
+        // Характеристики звуку з вкладеного об'єкта
+        "audio_features.loudness": { $lt: -10 },          // Тихі треки (менше ніж -10 дБ)
+        "audio_features.speechiness": { $lt: 0.1 },       // Низький вміст мовлення
+        "audio_features.instrumentalness": { $gt: 0.5 },  // Переважно інструментальна музика
+        
+        // Без нецензурного або дорослого контенту
+        explicit: false                                   
+    }, 
+    {
+        // Проєкція: виводимо тільки релевантні поля для перевірки
+        _id: 0,
+        track_name: 1,
+        artists: 1,
+        track_genre: 1,
+        explicit: 1,
+        "audio_features.loudness": 1,
+        "audio_features.speechiness": 1,
+        "audio_features.instrumentalness": 1
+    }
+).limit(10); // Обмежуємо вивід 10 треками для зручності перевірки
