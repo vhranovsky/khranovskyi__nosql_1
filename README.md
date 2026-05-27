@@ -193,7 +193,7 @@
     "nReturned" : 354, // кількість знайдених поп-треків
     "executionTimeMillis" : 2, // швидкість на рівні похибки
     "totalKeysExamined" : 412, // прочитано рівно стільки ключів, скільки треба
-    "totalDocsExamined" : 354, // нуль зайвих читань з диска
+    "totalDocsExamined" : 354, // нуль зайвих читань з диска(спывпадаэ з nReturned)
     "executionStages" : {
         "stage" : "FETCH",
         "nReturned" : 354,
