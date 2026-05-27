@@ -1,0 +1,1 @@
+D:\\Eductaion\\GO_IT\\AI_ML\\nosql\\mongosh\\bin\\mongosh.exe mongodb+srv://vhranovskiy84_db_user:V19JdJuHo2nSCheZ@cluster0.aybhihk.mongodb.net/?appName=Cluster0 --file queries/part4_indexes.js

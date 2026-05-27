@@ -1,7 +1,7 @@
 db = db.getSiblingDB("spotify");
 
 // Завдання 1. Топ-10 виконавців за середньою популярністю
-db.tracks.aggregate([
+const res1 = db.tracks.aggregate([
   // Розгортаємо масив артистів, щоб коректно врахувати кожного виконавця окремо
   { $unwind: "$artists" },
 
@@ -36,10 +36,13 @@ db.tracks.aggregate([
   // Обмежуємо результат топ-10 виконавцями
   { $limit: 10 }
 ]);
+print("Task1_res:\n")
+print(res1);
+print("\n")
 
 
 // Завдання 2. Розподіл треків за настроєм
-db.tracks.aggregate([
+const res2 = db.tracks.aggregate([
   // Визначаємо настрій для кожного документа
   {
     $project: 
@@ -116,10 +119,13 @@ db.tracks.aggregate([
   // Сортуємо за кількістю треків (від найбільшої групи до найменшої)
   { $sort: { track_count: -1 } }
 ]);
+print("Task2_res:\n")
+print(res2);
+print("\n")
 
 
 // Завдання 3. Найбільш «танцювальний» жанр
-db.tracks.aggregate([
+const res3 = db.tracks.aggregate([
   // Групуємо всі треки за жанрами та рахуємо агреговані метрики
   {
     $group: 
@@ -159,3 +165,6 @@ db.tracks.aggregate([
   // Оскільки нам потрібно визначити конкретний жанр, що підходить найкраще, лімітуємо вивід топ-10
   { $limit: 10 }
 ]);
+print("Task3_res:\n")
+print(res3);
+print("\n")

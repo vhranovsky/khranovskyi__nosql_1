@@ -1,7 +1,7 @@
 db = db.getSiblingDB("spotify");
 
 //Завдання 1. Треки для вечірки
-db.tracks.find(
+const ret1 = db.tracks.find(
     {
         // Енергійність та танцювальність
         "audio_features.danceability": { $gt: 0.7 },
@@ -20,10 +20,12 @@ db.tracks.find(
         duration_ms: 1
     }
 ).limit(10); // Обмежуємо вивід першими 10 треками для перевірки
-
+print("Task1_res:\n")
+print(ret1)
+print("\n")
 
 //Завдання 2. Виконавці, у яких усі треки популярні
-db.tracks.aggregate([
+const ret2 = db.tracks.aggregate([
   // Розгортаємо масив артистів. Якщо у треку 3 артисти, створиться 3 копії документа — по одній на кожного артиста.
   { $unwind: "$artists" },
 
@@ -65,10 +67,12 @@ db.tracks.aggregate([
   // Лімітуємо вивід топ-20 артистами
   { $limit: 20 }
 ]);
-
+print("Task2_res:\n")
+print(ret2)
+print("\n")
 
 //Завдання 3. Нетипові треки
-db.tracks.aggregate([
+const ret3 = db.tracks.aggregate([
   // Групуємо всі треки за жанром, рахуємо статистики та збираємо всі документи в масив
   {
     $group: 
@@ -154,10 +158,12 @@ db.tracks.aggregate([
   // Сортуємо жанри за алфавітом
   { $sort: { genre: 1 } }
 ]);
-
+print("Task3_res:\n")
+print(ret3)
+print("\n")
 
 // Завдання 4: Треки для фонової роботи
-db.tracks.find(
+const ret4 = db.tracks.find(
     {
         // Характеристики звуку з вкладеного об'єкта
         "audio_features.loudness": { $lt: -10 },          // Тихі треки (менше ніж -10 дБ)
@@ -179,3 +185,6 @@ db.tracks.find(
         "audio_features.instrumentalness": 1
     }
 ).limit(10); // Обмежуємо вивід 10 треками для зручності перевірки
+print("Task4_res:\n")
+print(ret4)
+print("\n")
